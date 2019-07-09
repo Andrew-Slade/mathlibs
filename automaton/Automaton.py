@@ -30,6 +30,19 @@ class Automaton:
 
 #Methods
 
+  def alpha_check(self):
+    """
+    Check whether or not the word is build using the
+    alphabet provided
+    """
+    for alpha in self.S:
+      if alpha in self.Q:
+        isalpha = True
+        break
+      else:
+        isalpha = False
+    return isalpha
+
   #Generalize me and the states
   def process(self):
     """
@@ -39,7 +52,9 @@ class Automaton:
     """
     for dataval in self.Q:
       print("Processed: ", dataval, " Against: ", self.T) 
-      if self.T != dataval:#check current state vs data
+      if self.L(dataval):#check current state vs data
+        pass
+      else:
         self.T = dataval#if data val is different change state
         print("Terminal state changed to: ", self.T) 
     return self.T 

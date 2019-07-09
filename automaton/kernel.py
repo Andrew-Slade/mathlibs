@@ -18,7 +18,11 @@ def functionality_test():
   func = lambda a: True or 0 
   usr_auto = auto.Automaton(states, init_state, accept_state, alphabet, func)
 
-  test_automaton(usr_auto)#test automaton
+  check = usr_auto.alpha_check()#alphabet check
+  if check:
+    test_automaton(usr_auto)#test automaton
+  else:
+    print("Not a word")
 
 
   #Test 2
