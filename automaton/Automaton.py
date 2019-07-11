@@ -1,19 +1,18 @@
 #!/usr/bin/env python3
 
+
 class Automaton:
 
   #Constructor
-  
   def __init__(self, states, init_state, accept_states, alpha, fx):
      self.Q = states #set of states with their next states
      self.I = init_state #set of initial states
      self.T = accept_states #set of terminal states
      self.S = alpha #an alphabet
-     self.L = fx #a function
+     self.L = fx #a function taking current state and a letter
      self.C = self.I #start at the current state
     
-#Accessors
-
+  #Accessors
   def getQ(self):
     return self.Q
   
@@ -32,46 +31,45 @@ class Automaton:
   def getC(self):
     return self.C
 
-#Methods
 
-  def alpha_check(self):
+  #Methods
+  def check_word(self, word):
     """
-    Check whether or not the word is build using the
-    alphabet provided
+    Check a users word to make sure it is in the alphabet
+    >>> takes: (string) user word
+    >>> returns: (boolean) whether or not the word is a word
     """
-    for alpha1 in self.Q:
-      for alpha2 in alpha1:
-        if alpha2 in self.S:
-          print(alpha2, " is in", self.S)
-          isalpha = True
-        else:
-          isalpha = False
-          break
-    return isalpha
+    for letter in word:
+      if letter in self.S:
+        isword = True
+      else:
+        isword = False
+        break
+    return isword
 
-  #Generalize me and the states
-  def process(self):
+
+  def process(self, letter):
     """
     Move states
-    >>> takes: (variable type)data
-    >>> returns: (variable type) a new state
+    >>> takes: (string) user letter
     """
-    return self.T 
+    self.C = self.L(letter, self.C)
+    print(self.C)
   
 
-  def check_end_state(self, currentState):
+  def check_end_state(self):
     """
     Check end states vs current states
-    >>> takes: (variable type) state
+    >>> takes: (variable type) states
     >>> returns: (boolean) whether current state is accepted
     """    
-    return False or currentState in self.T
+    return False or self.C[0] in self.T
       
 
   def print_results(self, result):
     """
     Print the result of the automaton
-    >>>takes (boolean) result of check end state
+    >>> takes (boolean) result of check end state
     """
     if result == True :
       print("The data passed the conditions")
