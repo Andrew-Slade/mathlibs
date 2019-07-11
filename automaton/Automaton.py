@@ -5,12 +5,13 @@ class Automaton:
   #Constructor
   
   def __init__(self, states, init_state, accept_state, alpha, fx):
-     self.Q = states#set of states
-     self.I = init_state#set of initial states
-     self.T = accept_state #set of terminal states
+     self.Q = states #set of states with their next states
+     self.I = init_state #set of initial states
+     self.T = accept_states #set of terminal states
      self.S = alpha #an alphabet
      self.L = fx #a function
-
+     self.C = self.I #start at the current state
+    
 #Accessors
 
   def getQ(self):
@@ -27,6 +28,9 @@ class Automaton:
 
   def getL(self):
     return self.L
+ 
+  def getC(self):
+    return self.C
 
 #Methods
 
@@ -35,8 +39,8 @@ class Automaton:
     Check whether or not the word is build using the
     alphabet provided
     """
-    for alpha in self.S:
-      if alpha in self.Q:
+    for alpha in self.Q:
+      if alpha in self.S:
         isalpha = True
         break
       else:
@@ -46,25 +50,20 @@ class Automaton:
   #Generalize me and the states
   def process(self):
     """
-    Process data using automaton
-    >>>takes: (variable type)data
-    >>>returns: (variable type) a new state
+    Move states
+    >>> takes: (variable type)data
+    >>> returns: (variable type) a new state
     """
-    for dataval in self.Q:
-      print("Processed: ", dataval, " Against: ", self.T) 
-      if self.L(dataval):#check current state vs data
-        pass
-      else:
-        self.T = dataval#if data val is different change state
-        print("Terminal state changed to: ", self.T) 
     return self.T 
   
 
-  def check_end_state(self):
+  def check_end_state(self, currentState):
     """
-    Check end state vs initial state
-    """
-    return False or self.T == self.I
+    Check end states vs current states
+    >>> takes: (variable type) state
+    >>> returns: (boolean) whether current state is accepted
+    """    
+    return False or currentState in self.T
       
 
   def print_results(self, result):
@@ -72,7 +71,6 @@ class Automaton:
     Print the result of the automaton
     >>>takes (boolean) result of check end state
     """
-    print("The initial state was: ", self.I, " and the terminal state was: ", self.T)
     if result == True :
       print("The data passed the conditions")
     else:

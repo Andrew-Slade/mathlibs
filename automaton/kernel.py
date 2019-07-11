@@ -8,7 +8,7 @@ def functionality_test():
   creates a simple automaton
   """
   #Test 1
-  states = gen_test_data(5)
+  states = 
   print(states)
   init_state = r.randint(0,1)
   accept_state = r.randint(0,1)
@@ -26,7 +26,8 @@ def functionality_test():
 
 
   #Test 2
-  states = gen_test_data(25)
+  states = [(a,b,c)]#a list of tuples for states
+  #contains state and connections
   print(states)
   init_state = r.randint(0,1)
   accept_state = r.randint(0,1)
@@ -37,34 +38,6 @@ def functionality_test():
   usr_auto = auto.Automaton(states, init_state, accept_state, alphabet, func)
 
   test_automaton(usr_auto)#test automaton
-
-  #Test 3
-  states = gen_test_data(125)
-  print(states)
-  init_state = r.randint(0,1)
-  accept_state = r.randint(0,1)
-  print("Initial state: ",init_state)
-  print("Accept state: ", accept_state)
-  alphabet = [0,1]
-  func = lambda a: True or 0 
-  usr_auto = auto.Automaton(states, init_state, accept_state, alphabet, func)
-  
-  test_automaton(usr_auto)#test automaton
-
-  #Test 4
-  #Generalized test
-#  states = 
-#  print(states)
-#  init_state = r.randint(0,1)
-#  accept_state = r.randint(0,1)
-#  print("Initial state: ",init_state)
-#  print("Accept state: ", accept_state)
-#  alphabet = [0,1]
-#  func = lambda a: True or 0 
-#  usr_auto = auto.Automaton(states, init_state, accept_state, alphabet, func)
-  
-#  test_automaton(usr_auto)#test automaton
-
 
 
 def test_automaton(automaton):
