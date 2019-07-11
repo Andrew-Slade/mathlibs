@@ -8,36 +8,21 @@ def functionality_test():
   creates a simple automaton
   """
   #Test 1
-  states = 
+  states = [(0,1,2),(1,2,1),(2,1,2)]#state, a transfer, b transfer
   print(states)
-  init_state = r.randint(0,1)
-  accept_state = r.randint(0,1)
+  init_state = states[0]
+  accept_states = [0,1]
   print("Initial state: ",init_state)
-  print("Accept state: ", accept_state)
-  alphabet = [0,1]
-  func = lambda a: True or 0 
-  usr_auto = auto.Automaton(states, init_state, accept_state, alphabet, func)
+  print("Accept state: ", accept_states)
+  alphabet = [0,1,2]
+  func = lambda a: a=="a" and states[1] or states[2]  
+  usr_auto = auto.Automaton(states, init_state, accept_states, alphabet, func)
 
   check = usr_auto.alpha_check()#alphabet check
-  if check:
-    test_automaton(usr_auto)#test automaton
-  else:
-    print("Not a word")
+  print(check)
+  #test_automaton(usr_auto)#test automaton
 
 
-  #Test 2
-  states = [(a,b,c)]#a list of tuples for states
-  #contains state and connections
-  print(states)
-  init_state = r.randint(0,1)
-  accept_state = r.randint(0,1)
-  print("Initial state: ",init_state)
-  print("Accept state: ", accept_state)
-  alphabet = [0,1]
-  func = lambda a: True or 0 
-  usr_auto = auto.Automaton(states, init_state, accept_state, alphabet, func)
-
-  test_automaton(usr_auto)#test automaton
 
 
 def test_automaton(automaton):

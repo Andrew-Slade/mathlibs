@@ -4,7 +4,7 @@ class Automaton:
 
   #Constructor
   
-  def __init__(self, states, init_state, accept_state, alpha, fx):
+  def __init__(self, states, init_state, accept_states, alpha, fx):
      self.Q = states #set of states with their next states
      self.I = init_state #set of initial states
      self.T = accept_states #set of terminal states
@@ -39,12 +39,14 @@ class Automaton:
     Check whether or not the word is build using the
     alphabet provided
     """
-    for alpha in self.Q:
-      if alpha in self.S:
-        isalpha = True
-        break
-      else:
-        isalpha = False
+    for alpha1 in self.Q:
+      for alpha2 in alpha1:
+        if alpha2 in self.S:
+          print(alpha2, " is in", self.S)
+          isalpha = True
+        else:
+          isalpha = False
+          break
     return isalpha
 
   #Generalize me and the states
