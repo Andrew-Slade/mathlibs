@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+#A Determinate Finite Automaton
 
 class Automaton:
 
@@ -66,12 +67,28 @@ class Automaton:
     return False or self.C[0] in self.T
       
 
-  def print_results(self, result):
+  def print_results(self):
     """
     Print the result of the automaton
     >>> takes (boolean) result of check end state
     """
-    if result == True :
+    if self.result == True :
       print("The data passed the conditions")
     else:
       print("The data did not pass the conditions")
+
+
+  def test_automaton(self, word):
+    """
+    test the automaton
+    >>> takes: (Automaton) an automaton
+               (string) a word
+    """
+    print("Starting Automaton...")
+    print(self.getI())#print init state
+    for letter in word:
+      self.process(letter)#Process the data and move states
+    print("Automaton finished moving states")
+    
+    self.result = self.check_end_state()#check the end state
+    self.print_results()#print results
