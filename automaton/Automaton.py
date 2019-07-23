@@ -80,22 +80,36 @@ class Automaton:
   #Accessors
   def states(self):
     return self.Q
+
+
   def initial_states(self):
     return self.I
+
+
   def accepting_states(self):
     return self.F
+
+
   def alphabet(self):
     return self.S
+
+
   def transition_function(self):
     return self.D
+
+
   def current_states(self):
     return self.C
+
+
   def id(self):
     return self.ID
+
 
   # The string representation of the automaton
   def __repr__(self):
     return self.showatdepth(0)
+
 
   #  
   def showatdepth(self, depth):
@@ -110,6 +124,7 @@ class Automaton:
                   "; Accepting "+", ".join([str(q) for q in sorted(self.F)])+"\n"+
             pad(depth)+"Transition#"+str(self.ID)+": "+", ".join([str(e[0])+str(e[1])+str(e[2]) for e in self.D]))
 
+  
   def successors(self, R, x):
     """
     Take a set of states R, a subset of Q, and a letter in S. Find all states that follow from elements of R along an edge labeled x.
@@ -136,6 +151,7 @@ class Automaton:
     # Once you've covered all the edges, you have found all the possible places you can end.
     return set_of_successors
 
+
   def isState(self, q):
     """
     Check an object to see if it is a state in this automaton.
@@ -143,6 +159,7 @@ class Automaton:
     >>> returns: (boolean) whether that is really one of our states.
     """
     return q in self.Q
+
 
   def isLetter(self, x):
     """
@@ -152,6 +169,7 @@ class Automaton:
     """
     return x in self.S
 
+
   def isWord(self, word):
     """
     Check a users word to make sure it is made of letters in this automaton's alphabet.
@@ -159,6 +177,7 @@ class Automaton:
     >>> returns: (boolean) whether that word is over the proper alphabet.
     """
     return all(self.isLetter(letter) for letter in word)
+
 
   def process(self, x):
     """
@@ -173,6 +192,7 @@ class Automaton:
     else:
       print("Following letter", x, "leads to", ",".join(self.C))
 
+
   def isHappy(self):
     """
     Check end states vs current states
@@ -180,7 +200,8 @@ class Automaton:
     >>> returns: (boolean) whether the current set of states includes an accepting state.
     """    
     return any(q in self.F for q in self.C)
-      
+ 
+     
   def read_word(self, word):
     """
     test the automaton
@@ -203,7 +224,9 @@ class Automaton:
     else:
       print("No! We are not in an accepting state; sorry.")
 
-    # Make sure the transition function is okay.
+
+
+  # Make sure the transition function is okay.
   def parse_transition_string(self, s):
     """
     Convert a string like "1x2,2x3,3y3" to a set of tuples {("1","x","2"),("2","x","3"),("3","y","3")}

@@ -1,4 +1,5 @@
-rom automaton import Automaton
+#!/usr/bin/env python3
+from Automaton import Automaton
 from regular import reg_ex, pad
 
 # you_play() runs an automaton on words of your choosing.
@@ -20,48 +21,61 @@ from regular import reg_ex, pad
 
 
 # I don't remember how to do unit tests properly, but asserts are a fine bandaid.
+
+
 # 1. Make an automaton with no states and nothing happening.
 A = Automaton(set(),set(),set(),set(),set())
 assert(reg_ex(A) == "")
+
 
 # 2. Make an automaton that only has one state and can loop by "a" but not "b".
 A = Automaton({"q"},{"q"},{"q"},{"a","b"},"qaq")
 assert(reg_ex(A) == "a*")
 
+
 # 3. Make an automaton that just goes by move "d" to an end state but has extra useless alphabet letters.
 A = Automaton({"0","F"},{"0"},{"F"},{"a","b","c","d","e","f"},"0dF")
 assert(reg_ex(A) == "d")
+
 
 # 4. Make an automaton that can recognize ab*a.
 A = Automaton({"0","1","2"},{"0"},{"2"},{"a","b"},"0a1,1b1,1a2")
 assert(reg_ex(A) == "ab*a")
 
+
 # 5. Make an automaton that can recognize (aaa)*.
 A = Automaton({"0","1","2"},{"0"},{"0"},{"a","b"},"0a1,1a2,2a0")
 assert(reg_ex(A) == "(aaa)*")
+
 
 # 6. Make an automaton that can recognize (aa+bb)*
 A = Automaton({"0","1","2"},{"0"},{"0"},{"a","b"},"0a1,1a0,0b2,2b0")
 assert(reg_ex(A) == "(aa+bb)*")
 
+
 # 7. Make a non-deterministic automaton that matches a+aa.
 A = Automaton({"0","1","2"},{"0"},{"2"},{"a"},"0a2,0a1,1a2")
 assert(reg_ex(A) == "a+aa")
+
 
 # 8. Make an automaton that matches a+aa using two accepting states.
 A = Automaton({"0","1","2","3"},{"0"},{"2","3"},{"a"},"0a3,0a1,1a2")
 assert(reg_ex(A) == "a+aa")
 
+
 # 9. Make an automaton that matches a+aa using two initial states.
 A = Automaton({"0","1","2","3"},{"0","2"},{"3"},{"a"},"2a3,0a1,1a3")
 assert(reg_ex(A) in ["a+aa","aa+a"])
+
 
 # 10. Make an automaton that matches bab*a+bbb*a. Credit to Allison Abels for finding this.
 A = Automaton({"0","2","3","4"},{"0"},{"4"},{"a","b"},"0b2,2a3,2b3,3b3,3a4")
 assert(reg_ex(A) == "bab*a+bbb*a")
 
+
 def play_with_sample():
   read_words(sample_automaton())
+
 
 def sample_automaton():
   """
@@ -88,6 +102,7 @@ def sample_automaton():
   usr_auto = Automaton(states, init_state, accept_states, alphabet, d)
   return usr_auto
 
+
 def read_words(A):
   """
   Lets you actually type words and see the automaton read the word.
@@ -110,6 +125,7 @@ def read_words(A):
     else:
       A.read_word(usr_word) #Read the user's word and see what happens.
 
+
 def do_homework():
   print("--\nExercise 1")
   A = Automaton({"0","1","2","3"},{"0"},{"1","2"},{"a","b"},"0a1,0b2,1a3,2a1,2b3,3a2,3b1")
@@ -130,6 +146,7 @@ def do_homework():
   print("--\nExercise 4")
   A = Automaton({"0","1","2","q","r","s"},{"0"},{"r"},{"a","b"},"0a1,0b2,1b0,1b2,2a0,2a1,1bq,qaq,qbr,qas,raq,ras,sbq,sbr")
   print("Answer is: "+reg_ex(A))  
+
 
 def build_auto():
   print("")

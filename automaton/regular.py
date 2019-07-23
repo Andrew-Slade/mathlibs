@@ -1,4 +1,4 @@
-from automaton import Automaton
+from Automaton import Automaton
 
 #
 # Chris Cunningham July 18, 2019
