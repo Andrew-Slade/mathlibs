@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+#Copyright 2020, Andrew Slade, All rights reserved.
+
 #dice rolling simulation library
 #standard roll given by roll()
 import random as rand
