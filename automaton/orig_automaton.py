@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+#Copyright 2020, Andrew Slade, All rights reserved.
 
 #A Determinate Finite Automaton
 
